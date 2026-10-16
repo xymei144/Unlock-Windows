@@ -1,0 +1,17 @@
+<Application x:Class="UnlockServer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Views/MainWindow.xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 索引 0 由 ThemeService 在运行时热替换为 Palette.Dark/Light/Acrylic -->
+                <ResourceDictionary Source="Themes/Palette.Dark.xaml"/>
+                <ResourceDictionary Source="Themes/Controls.xaml"/>
+                <!-- 由 LangService 在运行时热替换为 Lang.zh / Lang.en -->
+                <ResourceDictionary Source="Themes/Lang.zh.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

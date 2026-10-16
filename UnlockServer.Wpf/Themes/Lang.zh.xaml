@@ -1,0 +1,195 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ========== 中文 ========== -->
+    <sys:String x:Key="T.App.Title">蓝牙解锁</sys:String>
+    <sys:String x:Key="T.Tab.Devices">设备</sys:String>
+    <sys:String x:Key="T.Tab.Unlock">解锁</sys:String>
+    <sys:String x:Key="T.Tab.Settings">设置</sys:String>
+
+    <sys:String x:Key="T.Status.Current">当前状态</sys:String>
+    <sys:String x:Key="T.Btn.StartMonitor">开始监控</sys:String>
+    <sys:String x:Key="T.Btn.StopMonitor">停止监控</sys:String>
+    <sys:String x:Key="T.Btn.Lock">锁屏</sys:String>
+    <sys:String x:Key="T.Btn.AddDevice">添加设备</sys:String>
+    <sys:String x:Key="T.Btn.Remove">移除</sys:String>
+    <sys:String x:Key="T.Btn.Rename">改名</sys:String>
+    <sys:String x:Key="T.Btn.Uninstall">卸载</sys:String>
+    <sys:String x:Key="T.Btn.TestUnlock">测试解锁</sys:String>
+    <sys:String x:Key="T.Btn.Test">测试</sys:String>
+    <sys:String x:Key="T.Btn.Refresh">刷新</sys:String>
+    <sys:String x:Key="T.Btn.Cancel">取消</sys:String>
+    <sys:String x:Key="T.Btn.Ok">确定</sys:String>
+    <sys:String x:Key="T.Btn.Yes">是</sys:String>
+    <sys:String x:Key="T.Btn.No">否</sys:String>
+    <sys:String x:Key="T.Btn.ConfirmSelect">确定选择</sys:String>
+    <sys:String x:Key="T.Btn.ManualBind">手动绑定</sys:String>
+    <sys:String x:Key="T.Btn.UpdatePassword">更新密码</sys:String>
+    <sys:String x:Key="T.Btn.EnableLocal">启用本机解锁</sys:String>
+
+    <sys:String x:Key="T.Dev.Empty.Title">还没有绑定设备</sys:String>
+    <sys:String x:Key="T.Dev.Empty.Desc">添加后，靠近自动解锁，离开自动锁屏</sys:String>
+    <sys:String x:Key="T.Dev.RequireAll">需要全部设备都在附近</sys:String>
+    <sys:String x:Key="T.Dev.EnableTip">启用这台设备</sys:String>
+    <sys:String x:Key="T.Dev.Unnamed">未命名</sys:String>
+    <sys:String x:Key="T.Type.Classic">经典</sys:String>
+    <sys:String x:Key="T.Type.Ble">低功耗</sys:String>
+    <sys:String x:Key="T.Dev.Status.Waiting">等待中</sys:String>
+    <sys:String x:Key="T.Dev.Status.Near">在附近</sys:String>
+    <sys:String x:Key="T.Dev.Status.NotNear">不在附近</sys:String>
+    <sys:String x:Key="T.Dev.Status.Searching">正在寻找</sys:String>
+    <sys:String x:Key="T.Dev.Status.Locked">锁屏中</sys:String>
+    <sys:String x:Key="T.Dev.Status.Away">已离开</sys:String>
+    <sys:String x:Key="T.Dev.Status.NotConnected">未连接</sys:String>
+    <sys:String x:Key="T.Dev.Status.Connected">已连接</sys:String>
+    <sys:String x:Key="T.Dev.Status.InRange">在范围内</sys:String>
+    <sys:String x:Key="T.Dev.Status.OutOfRange">不在范围</sys:String>
+    <sys:String x:Key="T.Dev.Fallback">设备</sys:String>
+
+    <sys:String x:Key="T.Unlock.Section">本机解锁</sys:String>
+    <sys:String x:Key="T.Unlock.Desc">填写 Windows 登录密码（不是 PIN），启用后锁屏可直接解开</sys:String>
+    <sys:String x:Key="T.Unlock.Username">用户名</sys:String>
+    <sys:String x:Key="T.Unlock.Password">Windows 密码</sys:String>
+    <sys:String x:Key="T.Unlock.Prefer">优先使用本机解锁</sys:String>
+    <sys:String x:Key="T.Remote.Section">备用远程服务</sys:String>
+    <sys:String x:Key="T.Remote.IpTip">服务器地址</sys:String>
+    <sys:String x:Key="T.Remote.PortTip">端口</sys:String>
+    <sys:String x:Key="T.Local.NotInstalled">尚未安装本机解锁组件</sys:String>
+    <sys:String x:Key="T.Local.NeedPassword">组件已安装，请填写 Windows 密码</sys:String>
+    <sys:String x:Key="T.Local.Enabled">本机解锁已启用</sys:String>
+
+    <sys:String x:Key="T.Group.Appearance">外观</sys:String>
+    <sys:String x:Key="T.Appearance.Theme">主题</sys:String>
+    <sys:String x:Key="T.Theme.Dark">暗黑</sys:String>
+    <sys:String x:Key="T.Theme.Light">浅色</sys:String>
+    <sys:String x:Key="T.Theme.System">跟随系统</sys:String>
+    <sys:String x:Key="T.Theme.Acrylic">毛玻璃</sys:String>
+    <sys:String x:Key="T.Appearance.Language">语言</sys:String>
+    <sys:String x:Key="T.Lang.Zh">中文</sys:String>
+    <sys:String x:Key="T.Lang.En">English</sys:String>
+
+    <sys:String x:Key="T.Group.Switches">开关</sys:String>
+    <sys:String x:Key="T.Group.TimeAndSignal">时间与信号</sys:String>
+    <sys:String x:Key="T.Rule.AutoLock">离开后自动锁屏</sys:String>
+    <sys:String x:Key="T.Rule.AutoUnlock">靠近后自动解锁</sys:String>
+    <sys:String x:Key="T.Rule.AutoStart">开机后自动运行</sys:String>
+    <sys:String x:Key="T.Rule.ManualLock">不干预手动锁定</sys:String>
+    <sys:String x:Key="T.Rule.ManualUnlock">不干预手动解锁</sys:String>
+    <sys:String x:Key="T.Rule.IdleOnly">空闲时才锁定</sys:String>
+    <sys:String x:Key="T.Rule.LockWhenSeen">有信号时仍锁屏</sys:String>
+    <sys:String x:Key="T.Field.LockDelay">离开后锁屏</sys:String>
+    <sys:String x:Key="T.Field.IdleSeconds">空闲多久</sys:String>
+    <sys:String x:Key="T.Field.UnlockDelay">靠近后解锁</sys:String>
+    <sys:String x:Key="T.Field.ActionWarn">操作前提示</sys:String>
+    <sys:String x:Key="T.Field.RssiThreshold">信号阈值</sys:String>
+    <sys:String x:Key="T.Field.Hysteresis">滞后 / 丢失</sys:String>
+    <sys:String x:Key="T.Unit.Second">秒</sys:String>
+    <sys:String x:Key="T.Unit.dBm">dBm</sys:String>
+    <sys:String x:Key="T.Unit.dB">dB</sys:String>
+
+    <sys:String x:Key="T.Help.AutoLock">手机走远到超过「离开后锁屏」的距离后，等设定秒数就自动锁屏。</sys:String>
+    <sys:String x:Key="T.Help.AutoUnlock">手机回到设定距离内，等设定秒数后自动帮你解锁（需先启用本机解锁）。</sys:String>
+    <sys:String x:Key="T.Help.AutoStart">开机后自动在后台运行，不用手动打开。</sys:String>
+    <sys:String x:Key="T.Help.ManualLock">开着它：你按 Win+L 手动锁屏后，程序不会再自动解锁。建议开着。</sys:String>
+    <sys:String x:Key="T.Help.ManualUnlock">开着它：你手动输密码解锁后，程序不会因为你走开又反复锁上。</sys:String>
+    <sys:String x:Key="T.Help.IdleOnly">只在这段时间内没有任何键鼠操作时才自动锁屏；你正在打字就不会被打断。</sys:String>
+    <sys:String x:Key="T.Help.LockWhenSeen">配合「不干预手动解锁」使用：只要蓝牙曾经靠近过，之后信号断开也照样锁屏。</sys:String>
+    <sys:String x:Key="T.Help.LockDelay">判定「已离开」后，再等多少秒才真正锁屏。给一点缓冲，避免路过时误锁。</sys:String>
+    <sys:String x:Key="T.Help.IdleSeconds">连续多少秒没有键鼠操作算「空闲」。仅当「空闲时才锁定」开启时生效。</sys:String>
+    <sys:String x:Key="T.Help.UnlockDelay">手机进入范围后，等多少秒才解锁。设太小容易误触发，1~3 秒比较稳。</sys:String>
+    <sys:String x:Key="T.Help.ActionWarn">锁屏或解锁前，在屏幕上先提示多少秒，让你有心理准备。填 0 表示不提示。</sys:String>
+    <sys:String x:Key="T.Help.RssiThreshold">判定「在附近」的信号强度门槛，越接近 0 表示要求越近。实测坐在电脑前约 -20 ~ -35，填 -70 很宽松，想更严可填 -55。</sys:String>
+    <sys:String x:Key="T.Help.Hysteresis">两个数字：前面是「滞后」，信号要再弱这么多才算离开，防止在门槛边缘反复锁/解锁；后面是「丢失几秒」就按离开处理。</sys:String>
+
+    <sys:String x:Key="T.Hint.AddDevice">下一步：添加手机、手表或鼠标，靠近时解锁，离开时锁屏。</sys:String>
+    <sys:String x:Key="T.Hint.SetPassword">下一步：到「解锁」页填写 Windows 登录密码（不是 PIN），再点启用。</sys:String>
+    <sys:String x:Key="T.Hint.OpenRules">下一步：到「设置」页打开自动锁屏或自动解锁。</sys:String>
+    <sys:String x:Key="T.Hint.None"></sys:String>
+
+    <sys:String x:Key="T.Status.Ready">就绪</sys:String>
+    <sys:String x:Key="T.Status.Monitoring">监控中</sys:String>
+    <sys:String x:Key="T.Status.Stopped">已停止</sys:String>
+    <sys:String x:Key="T.Status.Locked">已锁定</sys:String>
+    <sys:String x:Key="T.Status.UnlockTesting">解锁测试中</sys:String>
+    <sys:String x:Key="T.Status.Setup">待设置</sys:String>
+    <sys:String x:Key="T.Status.NoDevice">请先添加设备</sys:String>
+    <sys:String x:Key="T.Status.Idle">--</sys:String>
+
+    <sys:String x:Key="T.Mon.Counter">监控: {0}/{1} 在范围内</sys:String>
+    <sys:String x:Key="T.Mon.ScanSilent">监控: 扫描暂无广播 {0}s，保持上次状态 {1}/{2}</sys:String>
+    <sys:String x:Key="T.Mon.Searching">正在重新寻找设备</sys:String>
+    <sys:String x:Key="T.Mon.MultiNear">{0}/{1} 台在附近  ·  {2} dBm</sys:String>
+    <sys:String x:Key="T.Mon.MultiNearNoRssi">{0}/{1} 台在附近</sys:String>
+    <sys:String x:Key="T.Mon.AllAway">设备不在附近</sys:String>
+    <sys:String x:Key="T.Mon.AllNotConnected">设备未连接</sys:String>
+    <sys:String x:Key="T.Mon.SingleNotConnected">{0} 未连接</sys:String>
+    <sys:String x:Key="T.Mon.NearRssi">{0} 在附近  ·  {1}</sys:String>
+    <sys:String x:Key="T.Mon.Near">{0} 在附近</sys:String>
+    <sys:String x:Key="T.Mon.Away">{0} 不在附近</sys:String>
+    <sys:String x:Key="T.Toast.Paused">已暂停自动锁屏 3 分钟</sys:String>
+    <sys:String x:Key="T.Toast.CancelHint">点击这条提示可取消</sys:String>
+    <sys:String x:Key="T.Toast.CancelLock">已取消本次锁屏</sys:String>
+    <sys:String x:Key="T.Toast.CancelUnlock">已取消本次解锁</sys:String>
+    <sys:String x:Key="T.Toast.Seconds">{0} 秒</sys:String>
+    <sys:String x:Key="T.Toast.Tray">已放到托盘，双击图标可打开</sys:String>
+    <sys:String x:Key="T.Pending.Lock">即将锁屏</sys:String>
+    <sys:String x:Key="T.Pending.Unlock">即将解锁</sys:String>
+
+    <sys:String x:Key="T.Scan.Title">搜索蓝牙设备</sys:String>
+    <sys:String x:Key="T.Scan.Subtitle">选择要绑定的设备</sys:String>
+    <sys:String x:Key="T.Scan.FilterAll">全部</sys:String>
+    <sys:String x:Key="T.Scan.FilterClassic">经典</sys:String>
+    <sys:String x:Key="T.Scan.RefreshTip">刷新列表</sys:String>
+    <sys:String x:Key="T.Scan.SearchPlaceholder">搜索设备名称或地址...</sys:String>
+    <sys:String x:Key="T.Scan.ManualTip">例如 AA:BB:CC:DD:EE:FF</sys:String>
+    <sys:String x:Key="T.Scan.Scanning">正在扫描附近设备...</sys:String>
+    <sys:String x:Key="T.Scan.EnableBt">请确保蓝牙已开启</sys:String>
+    <sys:String x:Key="T.Scan.Paired">已配对</sys:String>
+    <sys:String x:Key="T.Scan.TypeTip">经典蓝牙靠「保持连接」判断在附近，搜到的信号强度不代表能当钥匙。Find My 标签、手机经典通道都无法保持连接，绑定后会一直显示未连接；建议用低功耗(BLE)设备。</sys:String>
+    <sys:String x:Key="T.Scan.Hint">手表/手环搜不到时：断开与手机的蓝牙，打开可被发现或心率广播，也可手动输入 MAC。</sys:String>
+
+    <sys:String x:Key="T.Dlg.Info">提示</sys:String>
+    <sys:String x:Key="T.Dlg.Success">成功</sys:String>
+    <sys:String x:Key="T.Dlg.Warning">警告</sys:String>
+    <sys:String x:Key="T.Dlg.Error">错误</sys:String>
+    <sys:String x:Key="T.Dlg.Confirm">确认</sys:String>
+
+    <sys:String x:Key="T.Msg.SaveFailed">保存失败</sys:String>
+    <sys:String x:Key="T.Msg.SaveError">保存设置时出错</sys:String>
+    <sys:String x:Key="T.Msg.TestConnectionFailed">连接测试失败：</sys:String>
+    <sys:String x:Key="T.Msg.NeedCredentials">请先填写 Windows 用户名和密码，再启用本机解锁。</sys:String>
+    <sys:String x:Key="T.Msg.CredUpdated">本机解锁信息已更新。</sys:String>
+    <sys:String x:Key="T.Msg.InstallConfirm">将安装本机解锁组件，之后在锁屏界面可直接解开。是否继续？</sys:String>
+    <sys:String x:Key="T.Msg.InstallDone">本机解锁已启用：绑定设备靠近即可解锁本机，无需远程服务。</sys:String>
+    <sys:String x:Key="T.Msg.InstallIncomplete">安装未完成。你仍可改用备用远程服务解锁。</sys:String>
+    <sys:String x:Key="T.Msg.InstallFailed">安装失败：</sys:String>
+    <sys:String x:Key="T.Msg.NotInstalled">尚未安装本机解锁组件。</sys:String>
+    <sys:String x:Key="T.Msg.UninstallConfirm">将移除解锁组件并删除已保存的 Windows 密码，之后需要密码或 PIN 才能登录。是否继续？</sys:String>
+    <sys:String x:Key="T.Msg.UninstallDone">本机解锁已移除。锁屏界面上的解锁块会在下次锁屏后消失。</sys:String>
+    <sys:String x:Key="T.Msg.UninstallIncomplete">卸载未完成。请重试，或先手动锁屏一次再重试。</sys:String>
+    <sys:String x:Key="T.Msg.UninstallFailed">卸载失败：</sys:String>
+    <sys:String x:Key="T.Msg.TestConfirm">屏幕将锁定，并在约 5 秒后自动解锁。若失败，请用密码或 PIN 登录。是否继续？</sys:String>
+    <sys:String x:Key="T.Msg.TestFailed">无法开始解锁测试：</sys:String>
+    <sys:String x:Key="T.Msg.AddedNeedPassword">设备已添加。请到「解锁」页填写 Windows 密码并启用本机解锁。</sys:String>
+    <sys:String x:Key="T.Msg.AddedNeedRules">设备已添加。请在「设置」页打开自动锁屏 / 自动解锁。</sys:String>
+    <sys:String x:Key="T.Msg.AddedMonitoring">设备已添加，已开始监控。</sys:String>
+    <sys:String x:Key="T.Msg.NeedDevice">请先添加蓝牙设备再开始监控。</sys:String>
+    <sys:String x:Key="T.Msg.ClassicConfirm">这是一台「经典蓝牙」设备：它必须与电脑保持一条蓝牙连接才会显示「在附近」。&#10;&#10;Find My 防丢标签、手机的经典蓝牙通道都连不上，加进来会一直显示未连接，起不到钥匙作用。&#10;&#10;确定要添加吗？</sys:String>
+    <sys:String x:Key="T.Msg.ExitConfirm">确定退出程序？</sys:String>
+    <sys:String x:Key="T.Msg.StartMonitorFailed">无法启动蓝牙监控，可能没有蓝牙适配器或适配器不兼容。</sys:String>
+    <sys:String x:Key="T.Msg.ScanFailed">无法启动蓝牙扫描。</sys:String>
+    <sys:String x:Key="T.Msg.SelectDevice">请选择一台设备。</sys:String>
+    <sys:String x:Key="T.Msg.RenameTitle">给设备改个名字</sys:String>
+    <sys:String x:Key="T.Msg.RenamePrompt">只影响显示名称，不影响设备识别。苹果设备的广播名是乱码，改成自己认得出的名字更方便。</sys:String>
+    <sys:String x:Key="T.Msg.InvalidMac">请输入有效的 MAC 地址，例如 AA:BB:CC:DD:EE:FF</sys:String>
+    <sys:String x:Key="T.Msg.CannotAddAddress">无法添加该地址。</sys:String>
+    <sys:String x:Key="T.Msg.NoBluetoothDevice">未找到本机蓝牙设备。</sys:String>
+
+    <sys:String x:Key="T.Tray.Show">显示主窗口</sys:String>
+    <sys:String x:Key="T.Tray.Lock">立即锁屏</sys:String>
+    <sys:String x:Key="T.Tray.Hide">隐藏到托盘</sys:String>
+    <sys:String x:Key="T.Tray.Exit">退出</sys:String>
+    <sys:String x:Key="T.Tray.Tip">蓝牙解锁 - 靠近解锁，离开锁屏</sys:String>
+
+</ResourceDictionary>

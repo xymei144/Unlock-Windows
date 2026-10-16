@@ -1,0 +1,195 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ========== English ========== -->
+    <sys:String x:Key="T.App.Title">BLE Unlock</sys:String>
+    <sys:String x:Key="T.Tab.Devices">Devices</sys:String>
+    <sys:String x:Key="T.Tab.Unlock">Unlock</sys:String>
+    <sys:String x:Key="T.Tab.Settings">Settings</sys:String>
+
+    <sys:String x:Key="T.Status.Current">Status</sys:String>
+    <sys:String x:Key="T.Btn.StartMonitor">Start</sys:String>
+    <sys:String x:Key="T.Btn.StopMonitor">Stop</sys:String>
+    <sys:String x:Key="T.Btn.Lock">Lock now</sys:String>
+    <sys:String x:Key="T.Btn.AddDevice">Add device</sys:String>
+    <sys:String x:Key="T.Btn.Remove">Remove</sys:String>
+    <sys:String x:Key="T.Btn.Rename">Rename</sys:String>
+    <sys:String x:Key="T.Btn.Uninstall">Uninstall</sys:String>
+    <sys:String x:Key="T.Btn.TestUnlock">Test unlock</sys:String>
+    <sys:String x:Key="T.Btn.Test">Test</sys:String>
+    <sys:String x:Key="T.Btn.Refresh">Refresh</sys:String>
+    <sys:String x:Key="T.Btn.Cancel">Cancel</sys:String>
+    <sys:String x:Key="T.Btn.Ok">OK</sys:String>
+    <sys:String x:Key="T.Btn.Yes">Yes</sys:String>
+    <sys:String x:Key="T.Btn.No">No</sys:String>
+    <sys:String x:Key="T.Btn.ConfirmSelect">Select</sys:String>
+    <sys:String x:Key="T.Btn.ManualBind">Bind</sys:String>
+    <sys:String x:Key="T.Btn.UpdatePassword">Update password</sys:String>
+    <sys:String x:Key="T.Btn.EnableLocal">Enable local unlock</sys:String>
+
+    <sys:String x:Key="T.Dev.Empty.Title">No device bound yet</sys:String>
+    <sys:String x:Key="T.Dev.Empty.Desc">Once added, it unlocks when you arrive and locks when you leave</sys:String>
+    <sys:String x:Key="T.Dev.RequireAll">All devices must be nearby</sys:String>
+    <sys:String x:Key="T.Dev.EnableTip">Enable this device</sys:String>
+    <sys:String x:Key="T.Dev.Unnamed">Unnamed</sys:String>
+    <sys:String x:Key="T.Type.Classic">Classic</sys:String>
+    <sys:String x:Key="T.Type.Ble">LE</sys:String>
+    <sys:String x:Key="T.Dev.Status.Waiting">Waiting</sys:String>
+    <sys:String x:Key="T.Dev.Status.Near">Nearby</sys:String>
+    <sys:String x:Key="T.Dev.Status.NotNear">Not nearby</sys:String>
+    <sys:String x:Key="T.Dev.Status.Searching">Searching</sys:String>
+    <sys:String x:Key="T.Dev.Status.Locked">Locked</sys:String>
+    <sys:String x:Key="T.Dev.Status.Away">Away</sys:String>
+    <sys:String x:Key="T.Dev.Status.NotConnected">Not connected</sys:String>
+    <sys:String x:Key="T.Dev.Status.Connected">Connected</sys:String>
+    <sys:String x:Key="T.Dev.Status.InRange">In range</sys:String>
+    <sys:String x:Key="T.Dev.Status.OutOfRange">Out of range</sys:String>
+    <sys:String x:Key="T.Dev.Fallback">Device</sys:String>
+
+    <sys:String x:Key="T.Unlock.Section">Local unlock</sys:String>
+    <sys:String x:Key="T.Unlock.Desc">Enter your Windows password (not the PIN). Once enabled the lock screen can be opened directly.</sys:String>
+    <sys:String x:Key="T.Unlock.Username">User name</sys:String>
+    <sys:String x:Key="T.Unlock.Password">Windows password</sys:String>
+    <sys:String x:Key="T.Unlock.Prefer">Prefer local unlock</sys:String>
+    <sys:String x:Key="T.Remote.Section">Fallback remote service</sys:String>
+    <sys:String x:Key="T.Remote.IpTip">Server address</sys:String>
+    <sys:String x:Key="T.Remote.PortTip">Port</sys:String>
+    <sys:String x:Key="T.Local.NotInstalled">Local unlock component is not installed</sys:String>
+    <sys:String x:Key="T.Local.NeedPassword">Component installed - enter your Windows password</sys:String>
+    <sys:String x:Key="T.Local.Enabled">Local unlock is enabled</sys:String>
+
+    <sys:String x:Key="T.Group.Appearance">Appearance</sys:String>
+    <sys:String x:Key="T.Appearance.Theme">Theme</sys:String>
+    <sys:String x:Key="T.Theme.Dark">Dark</sys:String>
+    <sys:String x:Key="T.Theme.Light">Light</sys:String>
+    <sys:String x:Key="T.Theme.System">System</sys:String>
+    <sys:String x:Key="T.Theme.Acrylic">Acrylic</sys:String>
+    <sys:String x:Key="T.Appearance.Language">Language</sys:String>
+    <sys:String x:Key="T.Lang.Zh">中文</sys:String>
+    <sys:String x:Key="T.Lang.En">English</sys:String>
+
+    <sys:String x:Key="T.Group.Switches">Switches</sys:String>
+    <sys:String x:Key="T.Group.TimeAndSignal">Timing &amp; signal</sys:String>
+    <sys:String x:Key="T.Rule.AutoLock">Auto-lock when away</sys:String>
+    <sys:String x:Key="T.Rule.AutoUnlock">Auto-unlock when near</sys:String>
+    <sys:String x:Key="T.Rule.AutoStart">Run at startup</sys:String>
+    <sys:String x:Key="T.Rule.ManualLock">Respect manual lock</sys:String>
+    <sys:String x:Key="T.Rule.ManualUnlock">Respect manual unlock</sys:String>
+    <sys:String x:Key="T.Rule.IdleOnly">Lock only when idle</sys:String>
+    <sys:String x:Key="T.Rule.LockWhenSeen">Still lock if seen before</sys:String>
+    <sys:String x:Key="T.Field.LockDelay">Lock after leaving</sys:String>
+    <sys:String x:Key="T.Field.IdleSeconds">Idle for</sys:String>
+    <sys:String x:Key="T.Field.UnlockDelay">Unlock after arriving</sys:String>
+    <sys:String x:Key="T.Field.ActionWarn">Warn before acting</sys:String>
+    <sys:String x:Key="T.Field.RssiThreshold">Signal threshold</sys:String>
+    <sys:String x:Key="T.Field.Hysteresis">Hysteresis / lost</sys:String>
+    <sys:String x:Key="T.Unit.Second">s</sys:String>
+    <sys:String x:Key="T.Unit.dBm">dBm</sys:String>
+    <sys:String x:Key="T.Unit.dB">dB</sys:String>
+
+    <sys:String x:Key="T.Help.AutoLock">When the phone moves beyond the leaving distance, the screen locks after the configured delay.</sys:String>
+    <sys:String x:Key="T.Help.AutoUnlock">When the phone comes back within range, the screen unlocks after the configured delay (local unlock must be enabled first).</sys:String>
+    <sys:String x:Key="T.Help.AutoStart">Launch in the background automatically after Windows starts.</sys:String>
+    <sys:String x:Key="T.Help.ManualLock">On: after you lock manually with Win+L, the app will not unlock for you again. Recommended.</sys:String>
+    <sys:String x:Key="T.Help.ManualUnlock">On: after you unlock by typing your password, the app will not keep re-locking while you stay put.</sys:String>
+    <sys:String x:Key="T.Help.IdleOnly">Only auto-lock when there has been no keyboard or mouse activity for a while, so you are never interrupted while typing.</sys:String>
+    <sys:String x:Key="T.Help.LockWhenSeen">Used together with "Respect manual unlock": once Bluetooth was seen nearby, a later disconnect still locks the screen.</sys:String>
+    <sys:String x:Key="T.Help.LockDelay">How long to wait after the device is considered away before actually locking. A small buffer avoids locking when you just walk past.</sys:String>
+    <sys:String x:Key="T.Help.IdleSeconds">No keyboard or mouse input for this many seconds counts as idle. Only used when "Lock only when idle" is on.</sys:String>
+    <sys:String x:Key="T.Help.UnlockDelay">How long to wait after the phone enters range before unlocking. 1-3 s works well; too small may trigger by accident.</sys:String>
+    <sys:String x:Key="T.Help.ActionWarn">Show a countdown on screen before locking or unlocking. Set 0 to disable the notice.</sys:String>
+    <sys:String x:Key="T.Help.RssiThreshold">Signal level required to count as "nearby"; closer to 0 means it must be closer. Sitting at the desk it is about -20 to -35, so -70 is loose. Try -55 for stricter.</sys:String>
+    <sys:String x:Key="T.Help.Hysteresis">Two numbers: the first is hysteresis - the signal must drop this much more before it counts as away, preventing lock/unlock flapping at the edge; the second is how many seconds of silence counts as away.</sys:String>
+
+    <sys:String x:Key="T.Hint.AddDevice">Next: add your phone, watch or mouse - unlock when near, lock when away.</sys:String>
+    <sys:String x:Key="T.Hint.SetPassword">Next: open the Unlock tab and enter your Windows password (not the PIN), then enable it.</sys:String>
+    <sys:String x:Key="T.Hint.OpenRules">Next: turn on auto-lock or auto-unlock in the Settings tab.</sys:String>
+    <sys:String x:Key="T.Hint.None"></sys:String>
+
+    <sys:String x:Key="T.Status.Ready">Ready</sys:String>
+    <sys:String x:Key="T.Status.Monitoring">Monitoring</sys:String>
+    <sys:String x:Key="T.Status.Stopped">Stopped</sys:String>
+    <sys:String x:Key="T.Status.Locked">Locked</sys:String>
+    <sys:String x:Key="T.Status.UnlockTesting">Testing unlock</sys:String>
+    <sys:String x:Key="T.Status.Setup">Setup needed</sys:String>
+    <sys:String x:Key="T.Status.NoDevice">Add a device first</sys:String>
+    <sys:String x:Key="T.Status.Idle">--</sys:String>
+
+    <sys:String x:Key="T.Mon.Counter">Monitoring: {0}/{1} in range</sys:String>
+    <sys:String x:Key="T.Mon.ScanSilent">Monitoring: no broadcast for {0}s, keeping last state {1}/{2}</sys:String>
+    <sys:String x:Key="T.Mon.Searching">Looking for the device again</sys:String>
+    <sys:String x:Key="T.Mon.MultiNear">{0}/{1} nearby  ·  {2} dBm</sys:String>
+    <sys:String x:Key="T.Mon.MultiNearNoRssi">{0}/{1} nearby</sys:String>
+    <sys:String x:Key="T.Mon.AllAway">Device is not nearby</sys:String>
+    <sys:String x:Key="T.Mon.AllNotConnected">Devices not connected</sys:String>
+    <sys:String x:Key="T.Mon.SingleNotConnected">{0} not connected</sys:String>
+    <sys:String x:Key="T.Mon.NearRssi">{0} nearby  ·  {1}</sys:String>
+    <sys:String x:Key="T.Mon.Near">{0} nearby</sys:String>
+    <sys:String x:Key="T.Mon.Away">{0} not nearby</sys:String>
+    <sys:String x:Key="T.Toast.Paused">Auto-lock paused for 3 minutes</sys:String>
+    <sys:String x:Key="T.Toast.CancelHint">Click this notice to cancel</sys:String>
+    <sys:String x:Key="T.Toast.CancelLock">Lock cancelled</sys:String>
+    <sys:String x:Key="T.Toast.CancelUnlock">Unlock cancelled</sys:String>
+    <sys:String x:Key="T.Toast.Seconds">{0}s</sys:String>
+    <sys:String x:Key="T.Toast.Tray">Moved to the tray - double-click the icon to open</sys:String>
+    <sys:String x:Key="T.Pending.Lock">Locking soon</sys:String>
+    <sys:String x:Key="T.Pending.Unlock">Unlocking soon</sys:String>
+
+    <sys:String x:Key="T.Scan.Title">Scan for Bluetooth devices</sys:String>
+    <sys:String x:Key="T.Scan.Subtitle">Pick the device to bind</sys:String>
+    <sys:String x:Key="T.Scan.FilterAll">All</sys:String>
+    <sys:String x:Key="T.Scan.FilterClassic">Classic</sys:String>
+    <sys:String x:Key="T.Scan.RefreshTip">Refresh list</sys:String>
+    <sys:String x:Key="T.Scan.SearchPlaceholder">Search by name or address...</sys:String>
+    <sys:String x:Key="T.Scan.ManualTip">e.g. AA:BB:CC:DD:EE:FF</sys:String>
+    <sys:String x:Key="T.Scan.Scanning">Scanning nearby devices...</sys:String>
+    <sys:String x:Key="T.Scan.EnableBt">Make sure Bluetooth is turned on</sys:String>
+    <sys:String x:Key="T.Scan.Paired">Paired</sys:String>
+    <sys:String x:Key="T.Scan.TypeTip">Classic devices are judged "nearby" by an active connection - the signal shown here does not make them a key. Find My tags and the phone's classic channel cannot hold a connection, so they would always show "not connected". Prefer a Bluetooth LE device.</sys:String>
+    <sys:String x:Key="T.Scan.Hint">If your watch or band is missing: disconnect it from the phone, enable discoverable mode or heart-rate broadcast, or type the MAC address manually.</sys:String>
+
+    <sys:String x:Key="T.Dlg.Info">Notice</sys:String>
+    <sys:String x:Key="T.Dlg.Success">Success</sys:String>
+    <sys:String x:Key="T.Dlg.Warning">Warning</sys:String>
+    <sys:String x:Key="T.Dlg.Error">Error</sys:String>
+    <sys:String x:Key="T.Dlg.Confirm">Confirm</sys:String>
+
+    <sys:String x:Key="T.Msg.SaveFailed">Failed to save</sys:String>
+    <sys:String x:Key="T.Msg.SaveError">An error occurred while saving settings</sys:String>
+    <sys:String x:Key="T.Msg.TestConnectionFailed">Connection test failed: </sys:String>
+    <sys:String x:Key="T.Msg.NeedCredentials">Please enter your Windows user name and password before enabling local unlock.</sys:String>
+    <sys:String x:Key="T.Msg.CredUpdated">Local unlock credentials updated.</sys:String>
+    <sys:String x:Key="T.Msg.InstallConfirm">The local unlock component will be installed so the lock screen can be opened directly. Continue?</sys:String>
+    <sys:String x:Key="T.Msg.InstallDone">Local unlock is enabled. Your bound device can now unlock this PC - no remote service needed.</sys:String>
+    <sys:String x:Key="T.Msg.InstallIncomplete">Installation did not finish. You can still use the remote unlock service as a fallback.</sys:String>
+    <sys:String x:Key="T.Msg.InstallFailed">Installation failed: </sys:String>
+    <sys:String x:Key="T.Msg.NotInstalled">The local unlock component is not installed.</sys:String>
+    <sys:String x:Key="T.Msg.UninstallConfirm">The unlock component will be removed and the saved Windows password deleted. You will need your password or PIN to sign in. Continue?</sys:String>
+    <sys:String x:Key="T.Msg.UninstallDone">Local unlock removed. The lock screen tile disappears after the next lock.</sys:String>
+    <sys:String x:Key="T.Msg.UninstallIncomplete">Uninstall did not finish. Try again, or lock the screen once and retry.</sys:String>
+    <sys:String x:Key="T.Msg.UninstallFailed">Uninstall failed: </sys:String>
+    <sys:String x:Key="T.Msg.TestConfirm">The screen will lock and then unlock automatically after about 5 seconds. If it fails, sign in with your password or PIN. Continue?</sys:String>
+    <sys:String x:Key="T.Msg.TestFailed">Cannot start the unlock test: </sys:String>
+    <sys:String x:Key="T.Msg.AddedNeedPassword">Device added. Go to the Unlock tab to enter your Windows password and enable local unlock.</sys:String>
+    <sys:String x:Key="T.Msg.AddedNeedRules">Device added. Turn on auto-lock / auto-unlock in the Settings tab.</sys:String>
+    <sys:String x:Key="T.Msg.AddedMonitoring">Device added, monitoring now.</sys:String>
+    <sys:String x:Key="T.Msg.NeedDevice">Add a Bluetooth device before starting monitoring.</sys:String>
+    <sys:String x:Key="T.Msg.ClassicConfirm">This is a Classic Bluetooth device: it only shows "nearby" while it holds an active connection to the PC.&#10;&#10;Find My tags and the phone's classic Bluetooth channel cannot hold a connection, so they would always show "not connected" and cannot act as a key.&#10;&#10;Add it anyway?</sys:String>
+    <sys:String x:Key="T.Msg.ExitConfirm">Exit the application?</sys:String>
+    <sys:String x:Key="T.Msg.StartMonitorFailed">Failed to start Bluetooth monitoring. The adapter may be missing or incompatible.</sys:String>
+    <sys:String x:Key="T.Msg.ScanFailed">Failed to start Bluetooth scanning.</sys:String>
+    <sys:String x:Key="T.Msg.SelectDevice">Please select a device.</sys:String>
+    <sys:String x:Key="T.Msg.RenameTitle">Rename device</sys:String>
+    <sys:String x:Key="T.Msg.RenamePrompt">This only changes the display name, not how the device is matched. Apple devices broadcast a scrambled name, so a readable one helps.</sys:String>
+    <sys:String x:Key="T.Msg.InvalidMac">Enter a valid MAC address, for example AA:BB:CC:DD:EE:FF</sys:String>
+    <sys:String x:Key="T.Msg.CannotAddAddress">This address cannot be added.</sys:String>
+    <sys:String x:Key="T.Msg.NoBluetoothDevice">No local Bluetooth device was found.</sys:String>
+
+    <sys:String x:Key="T.Tray.Show">Show window</sys:String>
+    <sys:String x:Key="T.Tray.Lock">Lock now</sys:String>
+    <sys:String x:Key="T.Tray.Hide">Hide to tray</sys:String>
+    <sys:String x:Key="T.Tray.Exit">Exit</sys:String>
+    <sys:String x:Key="T.Tray.Tip">BLE Unlock - unlock when near, lock when away</sys:String>
+
+</ResourceDictionary>

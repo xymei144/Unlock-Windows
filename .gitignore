@@ -1,0 +1,10 @@
+bin
+obj
+.vs
+packages
+*.user
+UnlockServer.Provider/Debug/
+UnlockServer.Provider/Release/
+UnlockServer.Provider/x64/
+dist/
+nuget.exe
