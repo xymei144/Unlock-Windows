@@ -516,7 +516,7 @@ namespace UnlockServer.ViewModels
             {
                 if (_unlockManager?.sessionSwitchClass != null)
                 {
-                    _unlockManager.sessionSwitchClass.dolocking = true;
+                    _unlockManager.sessionSwitchClass.MarkSoftLockRequested();
                     _unlockManager.sessionSwitchClass.isLockBySoft = true;
                 }
                 _unlockManager?.MarkSoftwareLock();

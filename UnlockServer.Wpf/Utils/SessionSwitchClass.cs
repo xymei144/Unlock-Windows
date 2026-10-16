@@ -24,8 +24,20 @@ namespace UnlockServer
         public bool dounlocking = false;
         public bool IsLocked { get; private set; }
 
-        private readonly DateTime _startedAt = DateTime.Now;
-        private const int BootGraceSeconds = 90;
+        /// <summary>
+        /// 上一次由程序主动发起锁屏的时间。用于区分「软件锁屏」与「人工 Win+L」：
+        /// 只有紧邻软件锁屏（数秒内）到来的 SessionLock 才算软件锁屏，
+        /// 否则一律视为人工锁定，从而让「不干预手动锁定」真正生效。
+        /// </summary>
+        private DateTime _softLockRequestedAt = DateTime.MinValue;
+        private static readonly TimeSpan SoftLockWindow = TimeSpan.FromSeconds(5);
+
+        /// <summary>由程序在调用 LockWorkStation 之前置位，标记「这次锁屏是软件发起的」。</summary>
+        public void MarkSoftLockRequested()
+        {
+            _softLockRequestedAt = DateTime.Now;
+            dolocking = true;
+        }
 
         public SessionSwitchClass()
         {
@@ -83,20 +95,26 @@ namespace UnlockServer
         /// </summary>
         private void BeginSessionLock()
         {
-            if (dolocking)
+            // 判定本次锁屏是否由程序发起（软件锁屏）：
+            //   1) 标志位 dolocking 为真（程序正准备/正在锁屏），或
+            //   2) 距离程序主动请求锁屏很近（5 秒内）—— 用于 dolocking 被提前清掉的兜底。
+            // 除此之外一律视为人工锁定（含 Win+L、开始菜单锁屏、超时锁屏），
+            // 这样「不干预手动锁定」才不会被误判绕过。
+            bool softRequested = dolocking
+                || (_softLockRequestedAt != DateTime.MinValue
+                    && (DateTime.Now - _softLockRequestedAt) <= SoftLockWindow);
+
+            if (softRequested)
             {
-                isLockBySoft = true;
-            }
-            else if ((DateTime.Now - _startedAt).TotalSeconds < BootGraceSeconds)
-            {
-                // 开机/刚启动时系统锁屏视为允许自动解锁，避免「不干预人工锁定」挡住第一次解锁
                 isLockBySoft = true;
             }
             else
             {
                 isLockBySoft = false;
             }
+
             dolocking = false;
+            _softLockRequestedAt = DateTime.MinValue;
             IsLocked = true;
 
             SessionLockAction?.Invoke();

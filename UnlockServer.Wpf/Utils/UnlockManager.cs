@@ -38,6 +38,8 @@ namespace UnlockServer
         private readonly List<BoundDevice> _bound = new List<BoundDevice>();
         private readonly Dictionary<string, bool> _inRangeByAddress = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
         private bool isrunning;
+        private Thread _monitorThread;
+        private volatile bool _stopping;
 
         private int locktimecount;
         private bool isunlockfail;
@@ -128,6 +130,7 @@ namespace UnlockServer
 
         public void Start()
         {
+            LocalUnlock.ResetAbort();
             sessionSwitchClass = new SessionSwitchClass();
             try
             {
@@ -155,16 +158,26 @@ namespace UnlockServer
                     return;
                 }
 
-                Task.Delay(2000).ContinueWith(r =>
+                _stopping = false;
+                _monitorThread = new Thread(() =>
                 {
+                    // 启动后短暂延迟，等蓝牙与凭据初始化完成
+                    for (int i = 0; i < 20 && !_stopping; i++)
+                        Thread.Sleep(100);
+                    if (_stopping) return;
+
                     isrunning = true;
                     while (isrunning)
                     {
                         try { Tick(); }
                         catch (Exception ex) { LogHelper.WriteLine($"监控循环错误: {ex.Message}"); }
-                        Thread.Sleep(1000);
+                        // 用可中断的等待替代 Sleep，退出时能立即响应
+                        for (int i = 0; i < 10 && isrunning; i++)
+                            Thread.Sleep(100);
                     }
-                }, TaskContinuationOptions.LongRunning);
+                })
+                { IsBackground = true, Name = "UnlockMonitor" };
+                _monitorThread.Start();
 
                 LogHelper.WriteLine("解锁监控已启动");
             }
@@ -178,10 +191,26 @@ namespace UnlockServer
 
         public void Stop()
         {
+            _stopping = true;
             isrunning = false;
+            LocalUnlock.AbortPending();
             DismissPending();
-            sessionSwitchClass?.Close();
             _bluetooth?.RemoveScanUser();
+
+            // 先等监控线程退出，再释放 sessionSwitchClass。
+            // 顺序很重要：Tick() 内部会解引用 sessionSwitchClass，
+            // 若先置空再等待，可能在线程仍在跑时抛 NullReferenceException。
+            var t = _monitorThread;
+            if (t != null && t.IsAlive && t != Thread.CurrentThread)
+            {
+                try { t.Join(TimeSpan.FromSeconds(3)); }
+                catch { }
+            }
+            _monitorThread = null;
+
+            try { sessionSwitchClass?.Close(); } catch { }
+            sessionSwitchClass = null;
+
             LogHelper.WriteLine("解锁监控已停止");
         }
 
@@ -231,6 +260,8 @@ namespace UnlockServer
 
         private void Tick()
         {
+            if (_stopping) return;
+
             var enabled = _bound.Where(d => d.Enabled).ToList();
             if (enabled.Count == 0) return;
 
@@ -419,7 +450,7 @@ namespace UnlockServer
 
                     if (islocked && isautounlock)
                     {
-                        if (manuallock && !sessionSwitchClass.isLockBySoft)
+                        if (manuallock && !(sessionSwitchClass?.isLockBySoft ?? true))
                         {
                             if (shouldLog) LogHelper.WriteLine("当前为人工锁定，已设置不干预");
                             return;
@@ -431,9 +462,15 @@ namespace UnlockServer
                             return;
                         }
 
+                        // 冷却期内不再重复请求，避免一次靠近里反复触发多次解锁
+                        if ((DateTime.Now - lastUnLockTime) < UnlockCooldown)
+                        {
+                            if (shouldLog) LogHelper.WriteLine("解锁冷却中，暂不重复请求");
+                            return;
+                        }
+
                         var timeInRange = DateTime.Now - _deviceEnteredTime.Value;
-                        if (timeInRange >= UnlockDelayTime &&
-                            (DateTime.Now - lastUnLockTime) >= UnlockCooldown)
+                        if (timeInRange >= UnlockDelayTime)
                         {
                             RequestAction(PendingKind.Unlock);
                         }
@@ -467,7 +504,7 @@ namespace UnlockServer
                             return;
                         }
 
-                        if (!sessionSwitchClass.isUnlockBySoft && manualunlock &&
+                        if (!(sessionSwitchClass?.isUnlockBySoft ?? false) && manualunlock &&
                             !(lockWhenSeen && _seenNearbyAfterManualUnlock))
                         {
                             if (shouldLog) LogHelper.WriteLine("当前为人工解锁，已设置不干预");
@@ -677,7 +714,7 @@ namespace UnlockServer
                 LogHelper.WriteLine("执行锁屏");
                 if (sessionSwitchClass != null)
                 {
-                    sessionSwitchClass.dolocking = true;
+                    sessionSwitchClass.MarkSoftLockRequested();
                     sessionSwitchClass.isLockBySoft = true;
                 }
                 DoLock();
@@ -777,9 +814,13 @@ namespace UnlockServer
             }
 
             if (sessionSwitchClass == null)
+            {
+                // 注意：这里新建的实例没有挂 SessionLockAction/SessionUnlockAction，
+                // 仅用于让测试流程能读取 isLockBySoft 等状态位。正常运行时应已存在实例。
                 sessionSwitchClass = new SessionSwitchClass();
+            }
 
-            sessionSwitchClass.dolocking = true;
+            sessionSwitchClass.MarkSoftLockRequested();
             sessionSwitchClass.isLockBySoft = true;
             _unlockTestRunning = true;
 

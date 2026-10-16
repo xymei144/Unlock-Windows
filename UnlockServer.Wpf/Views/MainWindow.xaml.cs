@@ -219,10 +219,19 @@ namespace UnlockServer.Views
             var exitItem = new ToolStripMenuItem(LangService.T("T.Tray.Exit"));
             exitItem.Click += (s, e) =>
             {
-                if (MessageDialog.ShowConfirm(LangService.T("T.Msg.ExitConfirm")))
-                {
-                    ExitApplication();
-                }
+                // 必须把「确认 + 退出」推迟到托盘菜单的消息循环完全退栈之后再执行。
+                // 直接在 ContextMenuStrip 的 Click 里调 WPF ShowDialog()，会在
+                // WinForms 的模态菜单循环内再嵌套一层消息循环，导致确认后进程
+                // 卡住无法退出（表现为“关不掉、卡后台”）。
+                System.Windows.Application.Current?.Dispatcher?.BeginInvoke(
+                    new Action(() =>
+                    {
+                        if (MessageDialog.ShowConfirm(LangService.T("T.Msg.ExitConfirm")))
+                        {
+                            ExitApplication();
+                        }
+                    }),
+                    System.Windows.Threading.DispatcherPriority.ApplicationIdle);
             };
             menu.Items.Add(exitItem);
 
@@ -292,10 +301,26 @@ namespace UnlockServer.Views
 
         private void ExitApplication()
         {
+            if (_isExiting) return;
             _isExiting = true;
-            _viewModel.Cleanup();
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
+
+            // 先在后台兜底：无论 UI 线程是否被阻塞，2.5 秒后强制结束进程。
+            // 应用使用 ShutdownMode=OnExplicitShutdown + 常驻监控线程，
+            // 若某个环节（托盘菜单嵌套消息循环、监控线程未退出）卡住，
+            // 仅靠 Application.Shutdown() 会表现为「关不掉、卡后台」。
+            var watchdog = new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(2500);
+                LogHelper.WriteLine("退出超时，强制结束进程");
+                Environment.Exit(0);
+            })
+            { IsBackground = true, Name = "ExitWatchdog" };
+            watchdog.Start();
+
+            try { _viewModel.Cleanup(); } catch { }
+            try { _notifyIcon.Visible = false; } catch { }
+            try { _notifyIcon.Dispose(); } catch { }
+
             Application.Current.Shutdown();
         }
 
@@ -303,8 +328,6 @@ namespace UnlockServer.Views
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragDiag($"MouseLeftButtonDown  点击次数={e.ClickCount}  状态={e.ButtonState}  来源={(e.OriginalSource as FrameworkElement)?.GetType().Name}");
-
             if (e.ClickCount == 2)
             {
                 // 双击标题栏不做任何事（无边框窗口不支持最大化）
@@ -316,28 +339,11 @@ namespace UnlockServer.Views
             try
             {
                 DragMove();
-                DragDiag("DragMove 正常返回");
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-                DragDiag($"DragMove 抛异常: {ex.GetType().Name} {ex.Message}");
+                // 鼠标已释放时 DragMove 会抛此异常，属正常情况，忽略即可
             }
-            catch (Exception ex)
-            {
-                DragDiag($"DragMove 异常: {ex.GetType().Name} {ex.Message}");
-            }
-        }
-
-        /// <summary>诊断用：把标题栏拖动相关事件写入 dragdiag.txt</summary>
-        private static void DragDiag(string msg)
-        {
-            try
-            {
-                System.IO.File.AppendAllText(
-                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dragdiag.txt"),
-                    DateTime.Now.ToString("HH:mm:ss.fff") + "  " + msg + "\r\n");
-            }
-            catch { }
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

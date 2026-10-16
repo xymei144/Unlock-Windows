@@ -25,6 +25,12 @@ namespace UnlockServer
 
         private static EventWaitHandle _pulse;
 
+        /// <summary>程序退出时置位，使正在等待的 RequestUnlock 立即返回，不拖住关机流程。</summary>
+        private static volatile bool _aborted;
+        public static bool Aborted => _aborted;
+        public static void AbortPending() => _aborted = true;
+        public static void ResetAbort() => _aborted = false;
+
         public static string CredPath => Path.Combine(DataDir, "local.cred");
         public static string RequestPath => Path.Combine(DataDir, "unlock.req");
         public static string WarnPath => Path.Combine(DataDir, "unlock.warn");
@@ -255,33 +261,54 @@ namespace UnlockServer
                 Directory.CreateDirectory(DataDir);
                 EnsurePulseEvent();
 
-                string lastToken = null;
+                // 只写一次令牌，然后轮询等待凭据提供程序消费它。
+                // 注意：绝不能每轮都重写令牌 —— 提供程序读到「令牌变了」会误判为
+                // 新一次解锁请求，从而在用户手动解锁后又被反复触发（日志里的连续
+                // “执行解锁”即由此而来）。令牌必须是本次请求的唯一凭据。
+                var token = DateTime.UtcNow.Ticks.ToString();
+                File.WriteAllText(RequestPath, token, Encoding.ASCII);
+                Pulse();
+
+                // 最多等待约 16 秒（40 × 400ms）；程序退出时通过 AbortPending 立即中断
                 for (int i = 0; i < 40; i++)
                 {
-                    lastToken = DateTime.UtcNow.Ticks.ToString();
-                    File.WriteAllText(RequestPath, lastToken, Encoding.ASCII);
-                    Pulse();
+                    if (Aborted) { TryDeleteFile(RequestPath); return false; }
                     Thread.Sleep(400);
-                    if (WanClient.IsSessionLocked())
-                        continue;
 
-                    try
+                    // 会话已经不再锁屏 → 解锁成功（无论是否由本程序触发）
+                    if (!WanClient.IsSessionLocked())
                     {
-                        if (!File.Exists(RequestPath))
+                        // 确认提供程序确实消费了本次令牌；若文件已被删除或内容变了，
+                        // 说明是提供程序处理的；否则视为用户手动登录。
+                        try
+                        {
+                            if (!File.Exists(RequestPath))
+                            {
+                                TryDeleteFile(RequestPath);
+                                return true;
+                            }
+                            var left = File.ReadAllText(RequestPath).Trim();
+                            if (!string.Equals(left, token, StringComparison.Ordinal))
+                            {
+                                TryDeleteFile(RequestPath);
+                                return true;
+                            }
+                        }
+                        catch
+                        {
                             return true;
-                        var left = File.ReadAllText(RequestPath).Trim();
-                        if (!string.Equals(left, lastToken, StringComparison.Ordinal))
-                            return true;
-                    }
-                    catch
-                    {
-                        return true;
-                    }
+                        }
 
-                    LogHelper.WriteLine("会话已解锁，但锁屏组件未消费解锁请求（可能是手动登录）");
-                    return false;
+                        // 会话解开了，但不是本次请求消费的（例如用户手动输密码）。
+                        // 清理掉未被消费的请求文件，避免下次误判，并如实返回失败。
+                        TryDeleteFile(RequestPath);
+                        LogHelper.WriteLine("会话已解锁，但锁屏组件未消费解锁请求（可能是手动登录）");
+                        return false;
+                    }
                 }
 
+                // 超时：清理残留请求，避免污染下一次解锁
+                TryDeleteFile(RequestPath);
                 return false;
             }
             catch (Exception ex)
